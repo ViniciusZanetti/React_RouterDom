@@ -4,20 +4,17 @@ import { useState } from 'react';
 import Filtros from './Filtros';
 import Ordenador from './Ordenador';
 import Itens from './Itens';
+import stylesTema from '../../styles/Tema.module.scss';
+//import Menu from 'components/menu';
 
 export default function Cardapio() {
     const [busca, setBusca] = useState('');
     const [filtro, setFiltro] = useState<number | null>(null);
     const [ordenador, setOrdenador] = useState('');
     return (
-        <main>
-            <header className={styles.header}>
-                <div className={styles.header__text}>
-            A casa do código e da massa
-                </div>
-            </header>
+        <>
             <section className={styles.cardapio}>
-                <h3 className={styles.cardapio__titulo}>Cardápio</h3>
+                <h3 className={stylesTema.titulo}>Cardápio</h3>
                 <Buscador busca={busca} setBusca={setBusca} />
                 <div className={styles.cardapio__filtros}>
                     <Filtros filtro={filtro} setFiltro={setFiltro} />
@@ -25,6 +22,6 @@ export default function Cardapio() {
                 </div>
                 <Itens busca={busca} filtro={filtro} ordenador={ordenador} />
             </section>
-        </main>
+        </>
     );
 }
