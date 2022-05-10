@@ -3,11 +3,20 @@ import cardapio from '../../data/cardapio.json';
 import styles from './Inicio.module.scss';
 import stylesTema from '../../styles/Tema.module.scss';
 import NossaCasa from '../../assets/nossa_casa.png';
+import { useNavigate } from 'react-router-dom';
+import { Prato } from 'types/Prato';
 
 export default function Inicio() {
 
+    const navigate = useNavigate();
+
     let pratosRecomendados = [...cardapio];
     pratosRecomendados = pratosRecomendados.sort(() => Math.random() - 0.5).splice(0, 3);
+
+    function VerMais(prato: Prato) {
+        navigate(`/prato/${prato.id}`, {state : {prato}});
+
+    }
 
     return (
         <section>
@@ -20,7 +29,9 @@ export default function Inicio() {
                         <div className={styles.recomendado__imagem}>
                             <img src={item.photo} alt={item.title} />
                         </div>
-                        <button className={styles.recomendado__botao}>
+                        <button className={styles.recomendado__botao} onClick={() => {
+                            VerMais(item);
+                        }}>
                             Ver mais
                         </button>
                     </div>
@@ -28,9 +39,9 @@ export default function Inicio() {
             </div>
             <h3 className={stylesTema.titulo}>Nossa Casa</h3>
             <div className={styles.nossaCasa}>
-                <img src={NossaCasa} alt="Casa do Aluroni"/>
+                <img src={NossaCasa} alt="Casa do Aluroni" />
                 <div className={styles.nossaCasa__endereco}>
-                    Rua Vergueiro, 3185 <br/> <br/> Vila Mariana - SP
+                    Rua Vergueiro, 3185 <br /> <br /> Vila Mariana - SP
                 </div>
             </div>
         </section>
