@@ -1,13 +1,13 @@
 import styles from './Prato.module.scss';
 import { useParams } from 'react-router-dom';
-import classNames from 'classnames';
 import cardapio from 'data/cardapio.json';
+import NotFound from 'pages/NotFound';
 
 export default function Prato() {
     const { id } = useParams();
     const prato = cardapio.find(item => item.id === Number(id));
     if (!prato) {
-        return '';
+        return <NotFound/>;
     }
 
     function voltar() {
